@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-var users = require('./routes/articles');
+var articles = require('./db/articles');
 
-app.use('/articles', articles);
+
 

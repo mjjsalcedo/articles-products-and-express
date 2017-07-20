@@ -1,5 +1,4 @@
 /*jshint esversion: 6 */
 
-var users = require('./routes/products');
+var products = require('./db/products');
 
-app.use('/products', products);
