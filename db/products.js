@@ -19,6 +19,7 @@ class ProductCollection {
   }
 
   createProduct(info){
+    var test = info.id;
     var product = new Product(info.name, info.price, info.inventory);
     this.productList.push(product);
     var productIndex = this.productList.indexOf(product);
@@ -29,14 +30,18 @@ class ProductCollection {
 
   editProduct(info){
     var test = info;
-    console.log('test',test.id);
     var findItem = this.productList.filter(findItems);
-    console.log("editProduct");
+    var productIndex = this.productList.indexOf(findItem[0]);
+    var productId = this.productList[productIndex];
+    var revisedProduct = new Product(info.name, info.price, info.inventory);
+    revisedProduct.id = findItem[0].id;
 
-    console.log("findItem", findItem);
     if(findItem.length === 0){
-      console.log("no item");
+      console.log('item does not exist');
+    } else {
+      this.productList.splice(productIndex, 1, testProduct);
     }
+
     function findItems(item){
       if(item.id == test.id){
         return true;
