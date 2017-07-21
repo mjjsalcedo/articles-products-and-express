@@ -10,12 +10,12 @@ router.get('/', (req,res)=>{
 });
 
 router.post('/', function(req,res){
-
-  var test = req.body;
   dbProducts.createProduct(req.body);
-  var verifyProduct = dbProducts.checkCollection();
-  console.log("verify", verifyProduct[0].name);
+  res.send("success");
+});
 
+router.put('/', function(req,res){
+  dbProducts.editProduct(req.body);
 });
 
 module.exports = router;
