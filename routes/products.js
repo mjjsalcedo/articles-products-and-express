@@ -18,4 +18,8 @@ router.put('/', function(req,res){
   dbProducts.editProduct(req.body);
 });
 
+router.delete('/', function(req,res){
+  dbProducts.deleteProduct(req.body);
+});
+
 module.exports = router;

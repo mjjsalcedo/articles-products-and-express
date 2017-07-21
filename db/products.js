@@ -29,7 +29,7 @@ class ProductCollection {
   }
 
   editProduct(info){
-    var test = info;
+    var verifyInfo = info;
     var findItem = this.productList.filter(findItems);
     var productIndex = this.productList.indexOf(findItem[0]);
     var productId = this.productList[productIndex];
@@ -43,7 +43,27 @@ class ProductCollection {
     }
 
     function findItems(item){
-      if(item.id == test.id){
+      if(item.id == verifyInfo.id){
+        return true;
+      }
+    }
+  }
+
+  deleteProduct(info){
+    var verifyInfo = info;
+    var findItem = this.productList.filter(findItems);
+    var productIndex = this.productList.indexOf(findItem[0]);
+    var productId = this.productList[productIndex];
+
+    if(findItem.length === 0){
+      console.log('item does not exist');
+    } else {
+      this.productList.splice(productIndex, 1);
+      console.log(this.productList);
+    }
+
+    function findItems(item){
+      if(item.id == verifyInfo.id){
         return true;
       }
     }
