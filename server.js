@@ -7,8 +7,8 @@ const app = express();
 const expHbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const productRoutes = require('./routes/products');
-/*const articlesRoutes = require('./routes/articles');
-*/
+const articlesRoutes = require('./routes/articles');
+
 const hbs = expHbs.create({
   defaultLayout: 'main',
   extname: 'hbs'
@@ -17,7 +17,7 @@ const hbs = expHbs.create({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/products', productRoutes);
-/*app.use('/articles', articlesRoutes);*/
+app.use('/articles', articlesRoutes);
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');

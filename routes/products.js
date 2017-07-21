@@ -11,15 +11,17 @@ router.get('/', (req,res)=>{
 
 router.post('/', function(req,res){
   dbProducts.createProduct(req.body);
-  res.send("success");
+  res.redirect('/products');
 });
 
 router.put('/', function(req,res){
   dbProducts.editProduct(req.body);
+  res.redirect('/products');
 });
 
 router.delete('/', function(req,res){
   dbProducts.deleteProduct(req.body);
+  res.redirect('/products');
 });
 
 module.exports = router;
