@@ -29,6 +29,7 @@ class ProductCollection {
   }
 
   editProduct(info){
+    console.log('here');
     var verifyInfo = info;
     var findItem = this.productList.filter(findItems);
     var productIndex = this.productList.indexOf(findItem[0]);
@@ -39,7 +40,8 @@ class ProductCollection {
     if(findItem.length === 0){
       console.log('item does not exist');
     } else {
-      this.productList.splice(productIndex, 1, testProduct);
+      this.productList.splice(productIndex, 1, revisedProduct);
+      return revisedProduct;
     }
 
     function findItems(item){

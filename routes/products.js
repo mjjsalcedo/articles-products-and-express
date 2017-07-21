@@ -6,7 +6,13 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req,res)=>{
-  res.render('home');
+  var currentProducts = dbProducts.checkCollection();
+  res.render('./templates/products/index', {productList:currentProducts});
+});
+
+router.get('/:id', (req,res)=>{
+  var currentProducts = dbProducts.checkCollection();
+  res.render('./templates/products/index', {productList:currentProducts});
 });
 
 router.post('/', function(req,res){
@@ -14,14 +20,17 @@ router.post('/', function(req,res){
   res.redirect('/products');
 });
 
-router.put('/', function(req,res){
+router.put('/:id', function(req,res){
+  var productId = req.params.id;
+  req.body.id = productId;
   dbProducts.editProduct(req.body);
-  res.redirect('/products');
+  res.redirect('/products/' + productId);
 });
 
-router.delete('/', function(req,res){
+router.delete('/:id', function(req,res){
+  var productId = req.params.id;
   dbProducts.deleteProduct(req.body);
-  res.redirect('/products');
+  res.redirect('/products/' + productId);
 });
 
 module.exports = router;

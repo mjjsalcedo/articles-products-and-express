@@ -11,7 +11,7 @@ router.get('/', (req,res)=>{
 
 router.post('/', function(req,res){
   dbArticles.createArticle(req.body);
-  /*res.redirect('/articles');*/
+  res.redirect('/articles');
 });
 
 router.put('/', function(req,res){
