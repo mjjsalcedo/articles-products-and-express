@@ -29,7 +29,6 @@ class ProductCollection {
   }
 
   editProduct(info){
-    console.log('here');
     var verifyInfo = info;
     var findItem = this.productList.filter(findItems);
     var productIndex = this.productList.indexOf(findItem[0]);

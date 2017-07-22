@@ -5,12 +5,27 @@ const dbProducts = require('../db/products');
 const express = require('express');
 const router = express.Router();
 
+
 router.get('/', (req,res)=>{
+  let currentProducts = dbProducts.checkCollection();
+  res.render('./templates/products/index', {productList:currentProducts});
+});
+
+router.get('/new', (req,res)=>{
   var currentProducts = dbProducts.checkCollection();
   res.render('./templates/products/index', {productList:currentProducts});
 });
 
 router.get('/:id', (req,res)=>{
+  var nums = Number(req.params.id);
+  var displayRevisedItem = [];
+  var currentProducts = dbProducts.checkCollection();
+  var editedProduct = currentProducts[nums];
+  displayRevisedItem.push(editedProduct);
+  res.render('./templates/products/product', {'result': displayRevisedItem});
+});
+
+router.get('/:id/edit', (req,res)=>{
   var currentProducts = dbProducts.checkCollection();
   res.render('./templates/products/index', {productList:currentProducts});
 });
