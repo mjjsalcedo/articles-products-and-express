@@ -56,9 +56,7 @@ class ProductCollection {
     var productIndex = this.productList.indexOf(findItem[0]);
     var productId = this.productList[productIndex];
 
-    if(findItem.length === 0){
-      console.log('item does not exist');
-    } else {
+    if(findItem.length > 0){
       this.productList.splice(productIndex, 1);
       console.log(this.productList);
     }

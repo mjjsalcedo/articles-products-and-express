@@ -20,8 +20,19 @@ router.get('/:id', (req,res)=>{
   var displayRevisedItem = [];
   var currentProducts = dbProducts.checkCollection();
   var editedProduct = currentProducts[nums];
-  displayRevisedItem.push(editedProduct);
-  res.render('./templates/products/product', {'result': displayRevisedItem});
+  if(editedProduct === undefined){
+    var requestedItem = {
+        name: 'Item not found',
+        price: 'Item not found',
+        inventory: 'Item not found',
+        id: nums + ' Item not found',
+    };
+    displayRevisedItem.push(requestedItem);
+    res.render('./templates/products/product', {'result': displayRevisedItem});
+  } else {
+    displayRevisedItem.push(editedProduct);
+    res.render('./templates/products/product', {'result': displayRevisedItem});
+    }
 });
 
 router.get('/:id/edit', (req,res)=>{
@@ -50,10 +61,16 @@ router.put('/:id', function(req,res){
 });
 
 router.delete('/:id', function(req,res){
+  var beforeDelete = dbProducts.checkCollection();
   var productId = req.params.id;
   req.body.id = productId;
   dbProducts.deleteProduct(req.body);
+  var afterDelete = dbProducts.checkCollection();
+  if(beforeDelete !== afterDelete){
+  res.redirect('/products');
+  } else {
   res.redirect('/products/' + productId);
+  }
 });
 
 module.exports = router;
