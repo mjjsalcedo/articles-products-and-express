@@ -12,8 +12,7 @@ router.get('/', (req,res)=>{
 });
 
 router.get('/new', (req,res)=>{
-  var currentProducts = dbProducts.checkCollection();
-  res.render('./templates/products/index', {productList:currentProducts});
+  res.render('./templates/products/new');
 });
 
 router.get('/:id', (req,res)=>{
@@ -31,8 +30,16 @@ router.get('/:id/edit', (req,res)=>{
 });
 
 router.post('/', function(req,res){
-  dbProducts.createProduct(req.body);
-  res.redirect('/products');
+  var testNumber = Number(req.body.price);
+
+  if(typeof req.body.name !== 'string' || req.body.price != testNumber || typeof req.body.inventory !== 'string'){
+
+    res.redirect('/products/new');
+
+  } else {
+    var verifySuccess = dbProducts.createProduct(req.body);
+    res.redirect('/products');
+  }
 });
 
 router.put('/:id', function(req,res){
@@ -44,6 +51,7 @@ router.put('/:id', function(req,res){
 
 router.delete('/:id', function(req,res){
   var productId = req.params.id;
+  req.body.id = productId;
   dbProducts.deleteProduct(req.body);
   res.redirect('/products/' + productId);
 });
